@@ -1667,6 +1667,20 @@ function renderDiaryPage() {
     diaryLeftPage.style.opacity = '1';
     const prevEntries = prevDay.entries;
     const lastEntry = prevEntries[prevEntries.length - 1];
+    // 确保页面加载后，所有菜单功能都准备好
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.toggleDrawer === 'function') {
+        // 如果存在，就什么都不做，只是确保它被定义
+    } else {
+        // 如果不存在，手动初始化侧边栏状态
+        const overlay = document.getElementById('drawerOverlay');
+        const drawer = document.getElementById('drawer');
+        if (overlay && drawer) {
+            overlay.classList.remove('open');
+            drawer.classList.remove('open');
+        }
+    }
+});
     diaryLeftAuthor.textContent = lastEntry.author === 'claude' ? '哥哥' : '宝宝';
     diaryLeftAuthor.style.color = lastEntry.author === 'claude' ? '#c97b5a' : '#e8a0b4';
     diaryLeftText.textContent = lastEntry.text;
